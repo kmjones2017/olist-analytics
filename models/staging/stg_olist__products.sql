@@ -9,7 +9,9 @@ transformed as (
     select 
 
         trim(product_id) as product_id,
+        
         lower(trim(product_category_name)) as product_category_name,
+        
         cast(product_name_lenght as integer) as product_name_length,
         cast(product_description_lenght as integer) as product_description_length,
         cast(product_photos_qty as integer) as product_photos_qty,
