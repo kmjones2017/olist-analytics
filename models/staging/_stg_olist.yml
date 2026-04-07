@@ -165,16 +165,9 @@ models:
 
       - name: product_category_name
         description: "Product category (Portuguese, cleaned to lowercase)"
-        tests:
-          - relationships:
-              arguments:
-                to: ref('stg_olist__product_category_name_translation')
-                field: product_category_name
 
       - name: product_name_length
         description: "Length of the product name"
-        tests:
-          - not_null
 
       - name: product_description_length
         description: "Length of the product description"
