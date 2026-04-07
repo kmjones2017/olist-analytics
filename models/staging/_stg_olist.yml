@@ -17,7 +17,7 @@ sources:
 
 models:
   - name: stg_olist__geolocation
-    description: "Staging model for Olist geolocation data. Contains multiple latitude/longitude entries per zip code prefix."
+    description: "Staging model for Olist geolocation data. Contains multiple latitude/longitude entries per zip code prefix. (Not used in current marts layer)"
     columns:
       - name: zip_code_prefix
         description: "Zip code prefix (not unique)"
