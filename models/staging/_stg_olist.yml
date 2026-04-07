@@ -21,6 +21,8 @@ models:
     columns:
       - name: zip_code_prefix
         description: "Zip code prefix (not unique)"
+        tests:
+          - not_null
 
       - name: latitude
         description: "Latitude coordinate"
@@ -39,15 +41,38 @@ models:
     columns:
       - name: order_id
         description: "Unique order identifier"
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              to: ref('stg_olist__order_items')
+              field: order_id
 
       - name: customer_id
         description: "Customer identifier"
+        tests:
+          - not_null
 
       - name: order_status
         description: "Order status (e.g. delivered, shipped, canceled)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                - unavailable
+                - canceled
+                - delivered
+                - approved
+                - shipped
+                - invoiced
+                - processing
+                - created
 
       - name: order_purchase_timestamp
         description: "Timestamp when order was placed"
+        tests:
+          - not_null
 
       - name: order_approved_at
         description: "Timestamp when payment was approved"
@@ -63,24 +88,39 @@ models:
   
   - name: stg_olist__order_items
     description: "Staging model for order line items. One row per item within an order."
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - order_id
+            - order_item_id
     columns:
       - name: order_id
         description: "Order identifier"
+        tests:
+          - not_null
 
       - name: order_item_id
         description: "Sequential item number within an order"
+        tests:
+          - not_null
 
       - name: product_id
         description: "Product identifier"
+        tests:
+          - not_null
 
       - name: seller_id
         description: "Seller fulfilling the item"
+        tests:
+          - not_null    
 
       - name: shipping_limit_timestamp
         description: "The date by which the seller will ship the item"
 
       - name: item_price
         description: "Price of the individual item"
+        tests:
+          - not_null
 
       - name: freight_value
         description: "Shipping cost allocated to the item"
@@ -90,9 +130,18 @@ models:
     columns:
       - name: customer_id
         description: "Unique identifier for a customer record (order-level)"
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              to: ref('stg_olist__orders')
+              field: customer_id
 
       - name: customer_unique_id
         description: "Unique identifier for a customer across multiple orders"
+        tests:
+          - not_null
+          - unique
 
       - name: customer_zip_code_prefix
         description: "Zip code prefix of the customer"
@@ -108,12 +157,24 @@ models:
     columns:
       - name: product_id
         description: "Unique product identifier"
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              to: ref('stg_olist__order_items')
+              field: product_id
 
       - name: product_category_name
         description: "Product category (Portuguese, cleaned to lowercase)"
+        tests:
+          - relationships:
+              to: ref('stg_olist__product_category_name_translation')
+              field: product_category_name
 
       - name: product_name_length
         description: "Length of the product name"
+        tests:
+          - not_null
 
       - name: product_description_length
         description: "Length of the product description"
@@ -138,6 +199,12 @@ models:
     columns:
       - name: seller_id
         description: "Unique identifier for a seller"
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              to: ref('stg_olist__order_items')
+              field: seller_id
       
       - name: seller_zip_code_prefix
         description: "Zip code prefix of the seller"
@@ -153,6 +220,12 @@ models:
     columns:
       - name: product_category_name
         description: "Original category name in Portuguese"
+        tests:
+          - not_null
+          - unique
 
       - name: product_category_name_english
         description: "English translation"
+        tests:
+          - not_null
+        
