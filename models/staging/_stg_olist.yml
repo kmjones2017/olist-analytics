@@ -45,8 +45,9 @@ models:
           - not_null
           - unique
           - relationships:
-              to: ref('stg_olist__order_items')
-              field: order_id
+              arguments:
+                to: ref('stg_olist__order_items')
+                field: order_id
 
       - name: customer_id
         description: "Customer identifier"
@@ -90,9 +91,10 @@ models:
     description: "Staging model for order line items. One row per item within an order."
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - order_id
-            - order_item_id
+          arguments: 
+            combination_of_columns:
+              - order_id
+              - order_item_id
     columns:
       - name: order_id
         description: "Order identifier"
@@ -134,8 +136,9 @@ models:
           - not_null
           - unique
           - relationships:
-              to: ref('stg_olist__orders')
-              field: customer_id
+              arguments:
+                to: ref('stg_olist__orders')
+                field: customer_id
 
       - name: customer_unique_id
         description: "Unique identifier for a customer across multiple orders"
@@ -161,15 +164,17 @@ models:
           - not_null
           - unique
           - relationships:
-              to: ref('stg_olist__order_items')
-              field: product_id
+              arguments:
+                to: ref('stg_olist__order_items')
+                field: product_id
 
       - name: product_category_name
         description: "Product category (Portuguese, cleaned to lowercase)"
         tests:
           - relationships:
-              to: ref('stg_olist__product_category_name_translation')
-              field: product_category_name
+              arguments:
+                to: ref('stg_olist__product_category_name_translation')
+                field: product_category_name
 
       - name: product_name_length
         description: "Length of the product name"
@@ -203,8 +208,9 @@ models:
           - not_null
           - unique
           - relationships:
-              to: ref('stg_olist__order_items')
-              field: seller_id
+              arguments:
+                to: ref('stg_olist__order_items')
+                field: seller_id
       
       - name: seller_zip_code_prefix
         description: "Zip code prefix of the seller"
