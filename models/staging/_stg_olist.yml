@@ -34,3 +34,31 @@ models:
 
       - name: state
         description: "State abbreviation"
+  
+  - name: stg_olist__orders
+    description: "Staging model for Olist orders. Contains order-level timestamps and status."
+
+    columns:
+      - name: order_id
+        description: "Unique order identifier"
+
+      - name: customer_id
+        description: "Customer identifier"
+
+      - name: order_status
+        description: "Order status (e.g. delivered, shipped, canceled)"
+
+      - name: order_purchase_timestamp
+        description: "Timestamp when order was placed"
+
+      - name: order_approved_at
+        description: "Timestamp when payment was approved"
+      
+      - name: order_delivered_carrier_date
+        description: "Timestamp when the seller submitted the order to the logistic partner"
+
+      - name: order_delivered_customer_date
+        description: "Timestamp when order was delivered to customer"
+      
+      - name: order_estimated_delivery_date
+        description: "Timestamp of the estimated delivery date given to the customer at time of purchase"
