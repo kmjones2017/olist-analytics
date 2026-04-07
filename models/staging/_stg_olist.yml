@@ -14,3 +14,23 @@ sources:
       - name: orders_payments
       - name: orders_reviews
       - name: geolocation
+
+models:
+  - name: stg_olist__geolocation
+    description: "Staging model for Olist geolocation data. Contains multiple latitude/longitude entries per zip code prefix."
+
+    columns:
+      - name: zip_code_prefix
+        description: "Zip code prefix (not unique)"
+
+      - name: latitude
+        description: "Latitude coordinate"
+
+      - name: longitude
+        description: "Longitude coordinate"
+
+      - name: city
+        description: "City name"
+
+      - name: state
+        description: "State abbreviation"
