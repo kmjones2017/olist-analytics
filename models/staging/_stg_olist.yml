@@ -62,3 +62,28 @@ models:
       
       - name: order_estimated_delivery_date
         description: "Timestamp of the estimated delivery date given to the customer at time of purchase"
+  
+  - name: stg_olist__order_items
+    description: "Staging model for order line items. One row per item within an order."
+
+    columns:
+      - name: order_id
+        description: "Order identifier"
+
+      - name: order_item_id
+        description: "Sequential item number within an order"
+
+      - name: product_id
+        description: "Product identifier"
+
+      - name: seller_id
+        description: "Seller fulfilling the item"
+
+      - name: shipping_limit_timestamp
+        description: "The date by which the seller will ship the item"
+
+      - name: item_price
+        description: "Price of the individual item"
+
+      - name: freight_value
+        description: "Shipping cost allocated to the item"
