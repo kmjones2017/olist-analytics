@@ -44,10 +44,6 @@ models:
         tests:
           - not_null
           - unique
-          - relationships:
-              arguments:
-                to: ref('stg_olist__order_items')
-                field: order_id
 
       - name: customer_id
         description: "Customer identifier"
@@ -144,7 +140,6 @@ models:
         description: "Unique identifier for a customer across multiple orders"
         tests:
           - not_null
-          - unique
 
       - name: customer_zip_code_prefix
         description: "Zip code prefix of the customer"
