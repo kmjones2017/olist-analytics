@@ -7,6 +7,7 @@ transformed as (
 
         trim(order_id) as order_id,
         trim(customer_id) as customer_id,
+        
         lower(trim(order_status)) as order_status,
 
         cast(order_purchase_timestamp as timestamp_ntz) as order_purchase_timestamp,
