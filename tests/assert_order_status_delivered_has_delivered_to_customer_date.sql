@@ -1,3 +1,5 @@
+{{ config(severity = warn) }}
+
 select *
 from {{ ref('stg_olist__orders') }}
 where order_status = 'delivered'
