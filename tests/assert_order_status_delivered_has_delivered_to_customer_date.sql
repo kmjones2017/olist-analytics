@@ -1,4 +1,4 @@
-{{ config(severity = warn) }}
+{{ config(severity = 'warn') }}
 
 select *
 from {{ ref('stg_olist__orders') }}
