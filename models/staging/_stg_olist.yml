@@ -18,7 +18,6 @@ sources:
 models:
   - name: stg_olist__geolocation
     description: "Staging model for Olist geolocation data. Contains multiple latitude/longitude entries per zip code prefix."
-
     columns:
       - name: zip_code_prefix
         description: "Zip code prefix (not unique)"
@@ -37,7 +36,6 @@ models:
   
   - name: stg_olist__orders
     description: "Staging model for Olist orders. Contains order-level timestamps and status."
-
     columns:
       - name: order_id
         description: "Unique order identifier"
@@ -65,7 +63,6 @@ models:
   
   - name: stg_olist__order_items
     description: "Staging model for order line items. One row per item within an order."
-
     columns:
       - name: order_id
         description: "Order identifier"
@@ -87,3 +84,21 @@ models:
 
       - name: freight_value
         description: "Shipping cost allocated to the item"
+  
+  - name: stg_olist__customers
+    description: "Staging model for customers. Contains customer identifiers and location information."
+    columns:
+      - name: customer_id
+        description: "Unique identifier for a customer record (order-level)"
+
+      - name: customer_unique_id
+        description: "Unique identifier for a customer across multiple orders"
+
+      - name: customer_zip_code_prefix
+        description: "Zip code prefix of the customer"
+
+      - name: customer_city
+        description: "Customer city"
+
+      - name: customer_state
+        description: "Customer state"
