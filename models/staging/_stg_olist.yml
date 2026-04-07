@@ -102,3 +102,33 @@ models:
 
       - name: customer_state
         description: "Customer state"
+  
+  - name: stg_olist__products
+    description: "Staging model for products. Contains product attributes and category information."
+    columns:
+      - name: product_id
+        description: "Unique product identifier"
+
+      - name: product_category_name
+        description: "Product category (Portuguese, cleaned to lowercase)"
+
+      - name: product_name_length
+        description: "Length of the product name"
+
+      - name: product_description_length
+        description: "Length of the product description"
+
+      - name: product_photos_qty
+        description: "Number of product photos"
+      
+      - name: product_weight_g
+        description: "Weight of product in grams"
+      
+      - name: product_length_cm
+        description: "Length of product in centimeters"
+
+      - name: product_width_cm
+        description: "Width of product in centimeters"
+      
+      - name: product_height_cm
+        description: "Height of product in centimeters"
