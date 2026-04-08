@@ -1,0 +1,225 @@
+version: 2
+
+sources:
+  - name: olist
+    database: olist_analytics
+    schema: raw
+    tables:
+      - name: orders
+      - name: order_items
+      - name: customers
+      - name: products
+      - name: sellers
+      - name: product_category_name_translation
+      - name: orders_payments
+      - name: orders_reviews
+      - name: geolocation
+
+models:
+  - name: stg_olist__geolocation
+    description: "Staging model for Olist geolocation data. Contains multiple latitude/longitude entries per zip code prefix. (Not used in current marts layer)"
+    columns:
+      - name: zip_code_prefix
+        description: "Zip code prefix (not unique)"
+        tests:
+          - not_null
+
+      - name: latitude
+        description: "Latitude coordinate"
+
+      - name: longitude
+        description: "Longitude coordinate"
+
+      - name: city
+        description: "City name"
+
+      - name: state
+        description: "State abbreviation"
+  
+  - name: stg_olist__orders
+    description: "Staging model for Olist orders. Contains order-level timestamps and status."
+    columns:
+      - name: order_id
+        description: "Unique order identifier"
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: "Customer identifier"
+        tests:
+          - not_null
+
+      - name: order_status
+        description: "Order status (e.g. delivered, shipped, canceled)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                - unavailable
+                - canceled
+                - delivered
+                - approved
+                - shipped
+                - invoiced
+                - processing
+                - created
+
+      - name: order_purchase_timestamp
+        description: "Timestamp when order was placed"
+        tests:
+          - not_null
+
+      - name: order_approved_at
+        description: "Timestamp when payment was approved"
+      
+      - name: order_delivered_carrier_date
+        description: "Timestamp when the seller submitted the order to the logistic partner"
+
+      - name: order_delivered_customer_date
+        description: "Timestamp when order was delivered to customer"
+      
+      - name: order_estimated_delivery_date
+        description: "Timestamp of the estimated delivery date given to the customer at time of purchase"
+  
+  - name: stg_olist__order_items
+    description: "Staging model for order line items. One row per item within an order."
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: 
+            combination_of_columns:
+              - order_id
+              - order_item_id
+    columns:
+      - name: order_id
+        description: "Order identifier"
+        tests:
+          - not_null
+
+      - name: order_item_id
+        description: "Sequential item number within an order"
+        tests:
+          - not_null
+
+      - name: product_id
+        description: "Product identifier"
+        tests:
+          - not_null
+
+      - name: seller_id
+        description: "Seller fulfilling the item"
+        tests:
+          - not_null    
+
+      - name: shipping_limit_timestamp
+        description: "The date by which the seller will ship the item"
+
+      - name: item_price
+        description: "Price of the individual item"
+        tests:
+          - not_null
+
+      - name: freight_value
+        description: "Shipping cost allocated to the item"
+  
+  - name: stg_olist__customers
+    description: "Staging model for customers. Contains customer identifiers and location information."
+    columns:
+      - name: customer_id
+        description: "Unique identifier for a customer record (order-level)"
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('stg_olist__orders')
+                field: customer_id
+
+      - name: customer_unique_id
+        description: "Unique identifier for a customer across multiple orders"
+        tests:
+          - not_null
+
+      - name: customer_zip_code_prefix
+        description: "Zip code prefix of the customer"
+
+      - name: customer_city
+        description: "Customer city"
+
+      - name: customer_state
+        description: "Customer state"
+  
+  - name: stg_olist__products
+    description: "Staging model for products. Contains product attributes and category information."
+    columns:
+      - name: product_id
+        description: "Unique product identifier"
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('stg_olist__order_items')
+                field: product_id
+
+      - name: product_category_name
+        description: "Product category (Portuguese, cleaned to lowercase)"
+
+      - name: product_name_length
+        description: "Length of the product name"
+
+      - name: product_description_length
+        description: "Length of the product description"
+
+      - name: product_photos_qty
+        description: "Number of product photos"
+      
+      - name: product_weight_g
+        description: "Weight of product in grams"
+      
+      - name: product_length_cm
+        description: "Length of product in centimeters"
+
+      - name: product_width_cm
+        description: "Width of product in centimeters"
+      
+      - name: product_height_cm
+        description: "Height of product in centimeters"
+  
+  - name: stg_olist__sellers
+    description: "Staging model for sellers. Contains seller identifier and location information."
+    columns:
+      - name: seller_id
+        description: "Unique identifier for a seller"
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('stg_olist__order_items')
+                field: seller_id
+      
+      - name: seller_zip_code_prefix
+        description: "Zip code prefix of the seller"
+
+      - name: seller_city
+        description: "Seller city"
+      
+      - name: seller_state
+        description: "seller state"
+  
+  - name: stg_olist__product_category_name_translation
+    description: "Staging model for English translations of category names."
+    columns:
+      - name: product_category_name
+        description: "Original category name in Portuguese"
+        tests:
+          - not_null
+          - unique
+
+      - name: product_category_name_english
+        description: "English translation"
+        tests:
+          - not_null
+        
