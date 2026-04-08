@@ -7,4 +7,5 @@ Key features
  - data quality testing
  - business logic validation
 
-Additional source tables (payments, reviews, geolocation) are staged but not yet modeled in marts. These will be incorporated in future iterations.
+The geolocation source table is staged but not yet modeled in marts. This, as well as the payments and reviews tables, will be incorporated in future iterations.
+*This project is currently in progress and demonstrates my approach to building structured data models using dbt.
