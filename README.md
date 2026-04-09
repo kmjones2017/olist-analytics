@@ -1,9 +1,10 @@
 # olist-analytics
 End-to-end analytics engineering project using dbt and Snowflake on an e-commerce dataset (Olist). Builds a star schema to analyze revenue, customer retention, and seller performance with clean, production-style data modeling.
 
-Staging layer and tests built as of 5:37PM on 4/7/2026.
-
-Intermediate layer and tests built as of 2:00PM on 4/9/2026.
+Progress
+ - Staging layer and tests built as of 5:37PM on 4/7/2026.
+ - Intermediate layer and tests built as of 2:00PM on 4/9/2026.
+ - Marts layer and tests built as of 5:52PM on 4/9/2026.
 
 Key features
  - data quality testing
