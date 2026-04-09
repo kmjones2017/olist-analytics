@@ -30,6 +30,8 @@ int_order_items_enriched as (
         orders.order_delivered_customer_date
 
     from order_items
+    
+    left join orders on order_items.order_id = orders.order_id
     where orders.order_status not in ('canceled', 'unavailable')
 
 )
