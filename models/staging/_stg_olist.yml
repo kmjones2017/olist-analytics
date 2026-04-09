@@ -112,7 +112,7 @@ models:
         tests:
           - not_null    
 
-      - name: shipping_limit_timestamp
+      - name: seller_shipping_deadline
         description: "The date by which the seller will ship the item"
 
       - name: item_price

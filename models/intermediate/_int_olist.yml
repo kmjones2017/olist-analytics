@@ -1,0 +1,90 @@
+models:
+  - name: int_order_items_enriched
+    description: "Intermediate model that joins the orders and order_items staging models and filters out order items in orders that have an order_status value of canceled or unavailable"
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: 
+            combination_of_columns:
+              - order_id
+              - order_item_id
+    columns:
+      - name: order_id
+        description: "Unique order identifier"
+        tests:
+          - not_null
+      
+      - name: order_item_id
+        description: "Sequential item number within an order"
+        tests:
+          - not_null
+      
+      - name: product_id 
+        description: "Product identifier"
+        tests: 
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_olist__products')
+                field: product_id
+      
+      - name: customer_id
+        description: "Customer identifier"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_olist__customers')
+                field: customer_id
+      
+      - name: seller_id
+        description: "Seller fulfilling the item identifier"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_olist__sellers')
+                field: seller_id
+
+      - name: order_status
+        description: "Order status (e.g. delivered, shipped, canceled)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                - delivered
+                - approved
+                - shipped
+                - invoiced
+                - processing
+                - created 
+
+      - name: item_price
+        description: "Price of the individual item"
+        tests:
+          - not_null
+
+      - name: freight_value
+        description: "Shipping cost allocated to the item"
+
+      - name: order_purchase_timestamp
+        description: "Timestamp when order was placed"
+        tests:
+          - not_null
+
+      - name: order_estimated_delivery_date
+        description: "Timestamp of the estimated delivery date given to the customer at time of purchase"
+
+      - name: order_approved_at
+        description: "Timestamp when payment was approved"
+
+      - name: seller_shipping_deadline
+        description: "The date by which the seller will ship the item"
+
+      - name: order_delivered_carrier_date
+        description: "Timestamp when the seller submitted the order to the logistic partner"
+
+      - name: order_delivered_customer_date
+        description: "Timestamp when order was delivered to customer"
+
+      

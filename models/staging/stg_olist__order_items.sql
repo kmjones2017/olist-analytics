@@ -15,7 +15,7 @@ transformed as (
         trim(product_id) as product_id,
         trim(seller_id) as seller_id,
         
-        cast(shipping_limit_date as timestamp_ntz) as shipping_limit_timestamp,
+        cast(shipping_limit_date as timestamp_ntz) as seller_shipping_deadline,
         cast(price as number(10,2)) as item_price,
         cast(freight_value as number(10,2)) as freight_value
 
