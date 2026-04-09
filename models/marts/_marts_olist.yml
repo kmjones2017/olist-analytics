@@ -1,0 +1,188 @@
+models:
+  - name: fct_order_items
+    description: "Fact table at the order item grain. Each row represents a single item purchased within an order."
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: 
+            combination_of_columns:
+              - order_id
+              - order_item_id
+    columns:
+      - name: order_id
+        description: "Unique order identifier"
+        tests:
+          - not_null
+
+      - name: order_item_id
+        description: "Sequential item number within an order"
+        tests:
+          - not_null
+      
+      - name: product_id 
+        description: "Product identifier"
+        tests: 
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_products')
+                field: product_id
+      
+      - name: customer_id
+        description: "Customer identifier"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+      
+      - name: seller_id
+        description: "Seller fulfilling the item identifier"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_sellers')
+                field: seller_id
+
+      - name: order_status
+        description: "Order status (e.g. delivered, shipped, canceled)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                - delivered
+                - approved
+                - shipped
+                - invoiced
+                - processing
+                - created 
+
+      - name: item_price
+        description: "Price of the individual item"
+        tests:
+          - not_null
+
+      - name: freight_value
+        description: "Shipping cost allocated to the item"
+
+      - name: order_purchase_timestamp
+        description: "Timestamp when order was placed"
+        tests:
+          - not_null
+
+      - name: order_estimated_delivery_date
+        description: "Timestamp of the estimated delivery date given to the customer at time of purchase"
+
+      - name: order_approved_at
+        description: "Timestamp when payment was approved"
+
+      - name: seller_shipping_deadline
+        description: "The date by which the seller will ship the item"
+
+      - name: order_delivered_carrier_date
+        description: "Timestamp when the seller submitted the order to the logistic partner"
+
+      - name: order_delivered_customer_date
+        description: "Timestamp when order was delivered to customer"
+
+      - name: total_value
+        description: "Calculated business logic for the total value of each sale, defined as the sum of the item price and the cost of shipping" 
+        tests:
+          - not_null
+      
+      - name: fulfillment_speed
+        description: "Calculated business logic for the speed of order fulfillment, defined as the difference between order_purchase_timestamp and order_delivered_customer_date"
+        tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: ">= 0"
+
+      - name: approval_delay
+        description: "Calculated business logic for the delay between order purchase and approval, defined as the difference between order_purchase_timestamp and order_approved_at"
+
+  - name: dim_customers
+    description: "Dimension table in which each row is a unique customer of Olist"
+    columns:
+    - name: customer_id
+      description: "Unique identifier for a customer record (order-level)"
+      tests:
+        - not_null
+        - unique
+
+    - name: customer_unique_id
+      description: "Unique identifier for a customer across multiple orders"
+      tests:
+        - not_null
+
+    - name: customer_zip_code_prefix
+      description: "Zip code prefix of the customer"
+
+    - name: customer_city
+      description: "Customer city"
+
+    - name: customer_state
+      description: "Customer state"
+
+    - name: customer_region
+      description: "Customer region based on the customer_state value"
+
+  - name: dim_sellers
+    description: "Dimension table in which each row is a unique seller on Olist"
+    columns:
+      - name: seller_id
+        description: "Unique identifier for a seller"
+        tests:
+          - not_null
+          - unique
+      
+      - name: seller_zip_code_prefix
+        description: "Zip code prefix of the seller"
+
+      - name: seller_city
+        description: "Seller city"
+      
+      - name: seller_state
+        description: "Seller state"
+
+      - name: seller_region
+        description: "Seller region based on the seller_state value."
+
+  - name: dim_products
+    description: "Dimension table in which each row is a unique product."
+    columns:
+      - name: product_id
+        description: "Unique product identifier"
+        tests:
+          - not_null
+          - unique
+
+      - name: product_category_name
+        description: "Product category (Portuguese, cleaned to lowercase)"
+
+      - name: product_category_name_english
+        description: "English translation"
+        tests:
+          - not_null
+
+      - name: product_name_length
+        description: "Length of the product name"
+
+      - name: product_description_length
+        description: "Length of the product description"
+
+      - name: product_photos_qty
+        description: "Number of product photos"
+      
+      - name: product_weight_g
+        description: "Weight of product in grams"
+      
+      - name: product_length_cm
+        description: "Length of product in centimeters"
+
+      - name: product_width_cm
+        description: "Width of product in centimeters"
+      
+      - name: product_height_cm
+        description: "Height of product in centimeters" 

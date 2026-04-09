@@ -9,8 +9,8 @@ transformed as (
         cast(geolocation_lat as float) as latitude,
         cast(geolocation_lng as float) as longitude,
         
-        trim(geolocation_city) as city,
-        trim(geolocation_state) as state 
+        lower(trim(geolocation_city)) as city,
+        upper(trim(geolocation_state)) as state 
         
     from source 
 )
