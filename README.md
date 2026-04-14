@@ -85,7 +85,7 @@ Implemented robust testing to ensure data reliability:
 
 ## Executive Overview
 
-<img width="1355" height="770" alt="image" src="https://github.com/user-attachments/assets/d20f58e7-b265-4bba-b972-f53e55cc90e2" />
+<img width="1361" height="771" alt="image" src="https://github.com/user-attachments/assets/0e028cb6-3682-440f-9285-6151172fcc89" />
 
 - Tracks revenue and order trends over time  
 - Displays key KPIs (revenue, orders, customers, AOV)  
