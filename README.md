@@ -1,4 +1,4 @@
-# 📦 Olist Analytics Engineering Project
+# Olist Analytics Engineering Project
 
 End-to-end analytics engineering project using **dbt + Snowflake** on the Olist e-commerce dataset.
 
@@ -6,7 +6,7 @@ This project transforms raw transactional data into a **production-style star sc
 
 ---
 
-# 🚀 Project Overview
+# Project Overview
 
 - Built a modular data pipeline using **dbt (staging → intermediate → marts)**
 - Modeled a **star schema** to support analytics use cases
@@ -19,7 +19,7 @@ This project transforms raw transactional data into a **production-style star sc
 
 ---
 
-# 🏗️ Data Architecture
+# Data Architecture
 
 ### Layers:
 
@@ -39,7 +39,7 @@ This project transforms raw transactional data into a **production-style star sc
     - `dim_sellers`
 
 ---
-## 🧭 Data Model Evolution
+## Data Model Evolution
 
 ### Raw / Source Schema
 
@@ -61,7 +61,7 @@ This project transforms raw transactional data into a **production-style star sc
 - Optimized for BI tools and dashboard performance
   
 ---
-# 🧪 Data Quality & Testing
+# Data Quality & Testing
 
 Implemented robust testing to ensure data reliability:
 
@@ -76,14 +76,14 @@ Implemented robust testing to ensure data reliability:
 
 ---
 
-# 📊 Dashboards
+# Dashboards
 
-🔗 **Interactive Dashboards (Tableau Public):**  
-👉 [[Tableau Public Link]](https://public.tableau.com/app/profile/kayla.jones8313/viz/OlistMarketplace_17761158254000/Overview)
+**Interactive Dashboards (Tableau Public):**  
+[[Tableau Public Link]](https://public.tableau.com/app/profile/kayla.jones8313/viz/OlistMarketplace_17761158254000/Overview)
 
 ---
 
-## 📈 Executive Overview
+## Executive Overview
 
 <img width="1355" height="770" alt="image" src="https://github.com/user-attachments/assets/d20f58e7-b265-4bba-b972-f53e55cc90e2" />
 
@@ -93,7 +93,7 @@ Implemented robust testing to ensure data reliability:
 
 ---
 
-## 👥 Customer Behavior
+## Customer Behavior
 
 <img width="1363" height="766" alt="image" src="https://github.com/user-attachments/assets/d220f476-93ce-4baf-97d3-2694e77324d8" />
 
@@ -103,7 +103,7 @@ Implemented robust testing to ensure data reliability:
 
 ---
 
-## 📦 Product Performance
+## Product Performance
 
 <img width="1364" height="766" alt="image" src="https://github.com/user-attachments/assets/8be6aa75-7bde-4ada-b992-5133523dffdd" />
 
@@ -113,7 +113,7 @@ Implemented robust testing to ensure data reliability:
 
 ---
 
-## 🚚 Operations & Fulfillment
+## Operations & Fulfillment
 
 <img width="1363" height="763" alt="image" src="https://github.com/user-attachments/assets/60504b0c-2529-4d56-9883-0b35bb9f2e76" />
 
@@ -122,7 +122,7 @@ Implemented robust testing to ensure data reliability:
 - Compares estimated vs actual delivery times  
 ---
 
-# 🧠 Key Insights
+# Key Insights
 
 - Revenue is concentrated in a small number of product categories
 - Most customers are **one-time buyers** (low retention)
@@ -131,7 +131,7 @@ Implemented robust testing to ensure data reliability:
 
 ---
 
-# 🛠️ Tech Stack
+# Tech Stack
 
 - **dbt** – data modeling and transformations  
 - **Snowflake** – cloud data warehouse  
@@ -140,7 +140,7 @@ Implemented robust testing to ensure data reliability:
 
 ---
 
-# 🔄 Future Improvements
+# Future Improvements
 
 - Incorporate payments and reviews data into marts layer
 - Add geolocation-based analysis
@@ -149,13 +149,13 @@ Implemented robust testing to ensure data reliability:
 
 ---
 
-# 📌 Notes
+# Notes
 
 - Dataset is static (Kaggle Olist dataset)
 - Project focuses on **analytics engineering best practices**, not pipeline automation
 
 ---
 
-# 👤 Author
+# Author
 
 Kayla Jones  
