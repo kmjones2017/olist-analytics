@@ -156,19 +156,25 @@ Implemented robust testing to ensure data reliability:
 
 ---
 
-## Data Source
+## Data Source Citation
 
 This project uses the Olist E-commerce dataset available on Kaggle:
 
-@misc{olist_andr__sionek_2018,
-	title={Brazilian E-Commerce Public Dataset by Olist},
-	url={https://www.kaggle.com/dsv/195341},
-	DOI={10.34740/KAGGLE/DSV/195341},
-	publisher={Kaggle},
-	author={Olist and André Sionek},
-	year={2018}
-}
+### APA format
+Olist, and André Sionek. (2018). Brazilian E-Commerce Public Dataset by Olist [Data set]. Kaggle. https://doi.org/10.34740/KAGGLE/DSV/195341
 
+
+### BibTeX format
+```bibtex
+	@misc{olist_andr__sionek_2018,
+		title={Brazilian E-Commerce Public Dataset by Olist},
+		url={https://www.kaggle.com/dsv/195341},
+		DOI={10.34740/KAGGLE/DSV/195341},
+		publisher={Kaggle},
+		author={Olist and André Sionek},
+		year={2018}
+	}
+```
 The dataset contains real-world transactional data from a Brazilian marketplace, including orders, customers, products, and sellers.
 
 ---
