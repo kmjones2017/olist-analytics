@@ -70,7 +70,9 @@ Implemented robust testing to ensure data reliability:
 - `accepted_values` (categorical validation)
 - Custom business logic tests:
   - Delivered orders must have delivery timestamps
-  - Referential integrity across dimensions
+  - Freight values must not be negative
+  - Item price must not be negative
+  - Delivery dates must occur after the purchase timestamps 
 
 ---
 
