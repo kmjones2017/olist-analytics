@@ -115,7 +115,7 @@ Implemented robust testing to ensure data reliability:
 
 ## Operations & Fulfillment
 
-<img width="1363" height="763" alt="image" src="https://github.com/user-attachments/assets/60504b0c-2529-4d56-9883-0b35bb9f2e76" />
+<img width="1358" height="762" alt="image" src="https://github.com/user-attachments/assets/24e7ab0f-9854-465a-84e3-7e2b88bf6029" />
 
 - Measures delivery performance across regions and sellers  
 - Tracks delivery delays and approval timing  
