@@ -16,6 +16,7 @@ This project transforms raw transactional data into a **production-style star sc
   - Customer behavior
   - Product performance
   - Delivery operations
+- Added exposures to better reflect downstream dashboard dependencies
 
 ---
 
