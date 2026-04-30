@@ -1,0 +1,66 @@
+exposures:
+
+  - name: executive_overview
+    label: Executive Overview (1st tab)
+    type: dashboard                        
+    url: https://public.tableau.com/app/profile/kayla.jones8313/viz/OlistMarketplace_17761158254000/Overview 
+    description: >                          
+      Overview of Olist Marketplace
+
+    depends_on:                            
+      - ref('fct_order_items')
+      - ref('dim_customers')
+
+    owner:
+      name: Kayla Jones
+      email: kmjoness2017@gmail.com
+  
+  
+  - name: customer_behavior
+    label: Customer Behavior (2nd tab)
+    type: dashboard                        
+    url: https://public.tableau.com/app/profile/kayla.jones8313/viz/OlistMarketplace_17761158254000/Overview 
+    description: >                          
+      Comparison of repeat customers and new customers
+
+    depends_on:                            
+      - ref('fct_order_items')
+      - ref('dim_customers')
+
+    owner:
+      name: Kayla Jones
+      email: kmjoness2017@gmail.com 
+
+
+  - name: product_performance
+    label: Product Performance (3rd tab)
+    type: dashboard                        
+    url: https://public.tableau.com/app/profile/kayla.jones8313/viz/OlistMarketplace_17761158254000/Overview 
+    description: >                          
+      Sales volume vs revenue contribution comparison of products 
+
+    depends_on:                            
+      - ref('fct_order_items')
+      - ref('dim_products')
+
+    owner:
+      name: Kayla Jones
+      email: kmjoness2017@gmail.com
+  
+
+  - name: operations_and_fulfillment
+    label: Operations & Fulfillment (4th tab)
+    type: dashboard                        
+    url: https://public.tableau.com/app/profile/kayla.jones8313/viz/OlistMarketplace_17761158254000/Overview 
+    description: >                          
+      Delivery time comparison of regions and sellers
+
+    depends_on:                            
+      - ref('fct_order_items')
+      - ref('dim_products')
+      - ref('dim_customers')
+      - ref('dim_sellers')
+
+    owner:
+      name: Kayla Jones
+      email: kmjoness2017@gmail.com
